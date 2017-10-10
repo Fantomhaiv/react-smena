@@ -1,4 +1,3 @@
-
 export const CHANGE_COLLAPSE = "CHANGE_COLLAPSE"
 
 export const changeCollapse = isCollapsed => ({

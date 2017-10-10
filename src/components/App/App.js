@@ -11,47 +11,51 @@ import {connect} from 'react-redux'
 import {changeCollapse} from 'actions/siderActions'
 import PrivateRoute from 'components/PrivateRoute'
 import {getUserInfoRequest} from 'actions/authActions'
+import Login from 'pages/Login'
+import FormPage from 'pages/FormPage'
 
 const {Content, Footer, Sider} = Layout
 const StyledLayout = styled(Layout)`height: 100%;`
-const StyledFooter = styled(Footer)`textAlign: center;`
+const StyledFooter = styled(Footer)`textalign: center;`
 
 class App extends Component {
-  componentWillMount() {
-    this.props.getUserInfoRequest()
-  }
-  render() {
-    const {collapsed, changeCollapse, location: {pathname}} = this.props
+    componentWillMount() {
+        this.props.getUserInfoRequest()
+    }
+    render() {
+        const {collapsed, changeCollapse, location: {pathname}} = this.props
 
-    return (
-      <StyledLayout>
-        <Sider collapsible collapsed={collapsed} onCollapse={changeCollapse}>
-          <SideNav pathname={pathname} />
-        </Sider>
+        return (
+            <StyledLayout>
+              <Sider collapsible collapsed={collapsed} onCollapse={changeCollapse}>
+                <SideNav pathname={pathname} />
+              </Sider>
 
-        <Layout>
-          <Content style={{margin: '0 16px'}}>
-            <Switch>
-              <PrivateRoute path="/btc" component={USD_BTC} />
-              <PrivateRoute path="/eth" component={USD_ETH} />
-              <PrivateRoute path="/profile" component={Profile} />
-              <Redirect from="/" to="/btc" exact />
-            </Switch>
-          </Content>
-          <StyledFooter>Smena school © 2017</StyledFooter>
-        </Layout>
-      </StyledLayout>
-    )
-  }
+              <Layout>
+                <Content style={{margin: '0 16px'}}>
+                  <Switch>
+                    <PrivateRoute path="/btc" component={USD_BTC} />
+                    <PrivateRoute path="/eth" component={USD_ETH} />
+                    <PrivateRoute path="/profile" component={Profile} />
+                    <PrivateRoute path="/form" component={FormPage} />
+                    <Route path="/login" component={Login} />
+                    <Redirect from="/" to="/btc" exact />
+                  </Switch>
+                </Content>
+                <StyledFooter>Smena school © 2017</StyledFooter>
+              </Layout>
+            </StyledLayout>
+        )
+    }
 }
 
 const mapStateToProps = state => ({
-  collapsed: state.sider.collapsed
+    collapsed: state.sider.collapsed
 })
 
 const mapDispatchToProps = {
-  changeCollapse,
-  getUserInfoRequest
+    changeCollapse,
+    getUserInfoRequest
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

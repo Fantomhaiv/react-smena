@@ -3,37 +3,37 @@ import {handleActions} from 'redux-actions'
 import {getUserInfoFailure, getUserInfoSuccess} from 'actions/authActions'
 
 const email = handleActions(
-  {
-    [getUserInfoSuccess]: (state, action) => action.payload.email
-  },
-  ''
+    {
+        [getUserInfoSuccess]: (state, action) => action.payload.email
+    },
+    ''
 )
 const id = handleActions(
-  {
-    [getUserInfoSuccess]: (state, action) => action.payload.id
-  },
-  null
+    {
+        [getUserInfoSuccess]: (state, action) => action.payload.id
+    },
+    null
 )
 const isAuthorized = handleActions(
-  {
-    [getUserInfoSuccess]: () => true
-  },
-  false
+    {
+        [getUserInfoSuccess]: () => true
+    },
+    false
 )
 
 const isAuthorizing = handleActions(
-  {
-    [getUserInfoFailure]: () => false,
-    [getUserInfoSuccess]: () => false
-  },
-  true
+    {
+        [getUserInfoFailure]: () => false,
+        [getUserInfoSuccess]: () => false
+    },
+    true
 )
 
 export default combineReducers({
-  email,
-  id,
-  isAuthorized,
-  isAuthorizing
+    email,
+    id,
+    isAuthorized,
+    isAuthorizing
 })
 
 export const getEmail = state => state.auth.email
